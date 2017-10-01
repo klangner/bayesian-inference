@@ -1,0 +1,68 @@
+---
+title: "Lesson 4: Frequentist inference"
+output: html_notebook
+---
+
+
+## Confidence intervals
+
+Lets say that we flipped coin 100 times and we received:
+44H and 56T
+
+Is it fair coin?
+
+$$
+X_i \sim B(p)
+$$
+
+Using Central Limit Theorem we have
+$$
+\sum_{i}^{100} \sim N(100p, 100p(1-p))
+$$
+
+The 95% interval is 1.96 standard deviation, so:
+$$
+100p \pm 1.96\sqrt{100p(1-p)} \\
+\hat{p} = \frac{44}{100} = 0.44 \\
+44 \pm 1.96 \sqrt{44 \dot .56} = 44 \pm 9.7 \\
+$$
+So our 95% Confidence Intervls are (34.3, 53.7).
+It means that it our coin is probably fair.
+
+
+## Maximum Likelihood Estimate
+
+MLE is estimated from Probability Density Function. It is argument for which function takes the maximum value.
+
+### Bernoullie example
+
+$$
+Y_i \sim B(\theta) \\
+P(Y_i=1 | \theta) = \prod_{i=1}^{n} P(Y_i=y_i | \theta) = \prod_{i=1}^{n} \theta^{y_i}(1-\theta)^{1-y_i}
+$$
+
+This defines the probablity of observing data given the probability θ.
+
+We can also try to estimate θ given the data samples y. This is **likelyhood**.
+$$
+L(\theta|y) = \prod_{i=1}^{n} \theta^{y_i}(1-\theta)^{1-y_i}
+$$
+Based on this we have MLE and log MLE which is often used for practical reasons (numeric stability).
+$$
+L(\hat{\theta}) = argmax L(\theta | y) \\
+l(\theta) = log \ L(\theta | y) \\
+l(\theta) = log [ \prod_{i} \theta^{y_i} (1-theta)^{1-y_i}] = \\
+(\sum_{i} y_i) log \theta + (\sum_{i} (1-y_i))log(1-\theta)
+$$
+
+### Ploting MLE
+
+The following example show MLE estimate for Bernoulli with n trials and received y heads.
+
+```{r}
+likelihood = function(n, y, theta){ return( theta^y * (1-theta)^(n-y)) }
+theta = seq(from=0.01, to=0.99, by=0.01)
+plot(theta, likelihood(100, 22, theta))
+abline(v=.22)
+```
+
