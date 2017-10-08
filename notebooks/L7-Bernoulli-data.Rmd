@@ -115,3 +115,12 @@ mean(theta1>theta2)
 # Note for other distributions:
 # dgamma,pgamma,qgamma,rgamma
 # dnorm,pnorm,qnorm,rnorm
+
+```{r}
+plot(theta,dbeta(theta,1,5),type="l")
+```
+
+```{r}
+
+pbeta(.5,1,5)
+```
