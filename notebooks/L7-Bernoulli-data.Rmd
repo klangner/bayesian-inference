@@ -65,38 +65,62 @@ lines(theta,44*dbinom(33,size=40,p=theta),lty=3)
 legend("topleft", c("Posteriori", "Priorior", "MLE"))
 ```
 
-# posterior probabilities
+ posterior probabilities
+```{r}
 1-pbeta(.25,41,11)
 1-pbeta(.5,41,11)
 1-pbeta(.8,41,11)
+```
 
-# equal-tailed 95% credible interval
+ equal-tailed 95% credible interval
+```{r} 
 qbeta(.025,41,11)
 qbeta(.975,41,11)
+```
 
-# 6) Posterior is Beta(8+24,4+40-24) = Beta(32,20)
+ 6) Second student This one has 24 questions right
+ 
+ Posterior is Beta(8+24,4+40-24) = Beta(32,20)
+```{r} 
 32/(32+20)  # posterior mean
 24/40       # MLE
+```
 
+```{r}
 plot(theta,dbeta(theta,32,20),type="l")
 lines(theta,dbeta(theta,8,4),lty=2)
 lines(theta,44*dbinom(24,size=40,p=theta),lty=3)
-
+```
+```{r}
 1-pbeta(.25,32,20)
 1-pbeta(.5,32,20)
 1-pbeta(.8,32,20)
-
+```
+```{r}
 qbeta(.025,32,20)
 qbeta(.975,32,20)
+```
 
-# 7) Estimate by simulation: draw 1,000 samples from each and see how often 
-#    we observe theta1>theta2
+ 7) Estimate by simulation: draw 1,000 samples from each and see how often 
+    we observe theta1>theta2
 
+```{r}
+# rbeta random samples 1000 points from Beta(41, 11)
 theta1=rbeta(1000,41,11)
 theta2=rbeta(1000,32,20)
 mean(theta1>theta2)
+```
 
 
 # Note for other distributions:
 # dgamma,pgamma,qgamma,rgamma
 # dnorm,pnorm,qnorm,rnorm
+
+```{r}
+plot(theta,dbeta(theta,1,5),type="l")
+```
+
+```{r}
+
+pbeta(.5,1,5)
+```

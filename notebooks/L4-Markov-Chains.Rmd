@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Random walk
+
+$$p(X_{t+1}|X_t=x_t) = N(x_t, 1)$$
+
+```{r}
+set.seed(34)
+
+n = 100
+x = numeric(n)
+
+for(i in 2:n){
+  x[i] = rnorm(1, mean=x[i-1], sd=1)
+}
+
+plot.ts(x)
+```
+
+## Quiz
+
+```{r}
+Q = matrix(c(0.0, 1.0,
+             0.3, 0.7), 
+           nrow=2, byrow=TRUE)
+Q10 = Q %*% Q %*% Q %*% Q %*% Q %*% Q %*% Q %*% Q %*% Q %*% Q # h=10 steps in the future
+round(Q10, 3)
+```
+```{r}
+c(0.0, 1.0) %*% Q %*% Q
+```
+
+```{r}
+(.790+.763)/2
+```
+
+```{r}
+ c(0.231, 0.769) %*% Q %*% Q %*% Q
+```
